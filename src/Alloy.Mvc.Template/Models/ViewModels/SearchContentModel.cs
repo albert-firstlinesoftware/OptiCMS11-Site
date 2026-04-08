@@ -3,9 +3,9 @@ using AlloyTemplates.Models.Pages;
 
 namespace AlloyTemplates.Models.ViewModels
 {
-    public class SearchContentModel : PageViewModel<SearchPage>
+    public class SearchContentModel : PageViewModel<SitePageData>
     {
-        public SearchContentModel(SearchPage currentPage) : base(currentPage)
+        public SearchContentModel(SitePageData currentPage) : base(currentPage)
         {
         }
 

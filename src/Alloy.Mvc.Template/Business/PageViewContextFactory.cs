@@ -49,9 +49,31 @@ namespace AlloyTemplates.Business
                     CustomerZonePages = startPage.CustomerZonePageLinks,
                     LoggedIn = requestContext.HttpContext.User.Identity.IsAuthenticated,
                     LoginUrl = new MvcHtmlString(GetLoginUrl(currentContentLink)),
-                    SearchActionUrl = new MvcHtmlString(EPiServer.Web.Routing.UrlResolver.Current.GetUrl(startPage.SearchPageLink)),
+                    SearchActionUrl = new MvcHtmlString(GetSearchPageUrl(startPage)),
                     IsInReadonlyMode = _databaseMode.DatabaseMode == DatabaseMode.ReadOnly
                 };
+        }
+
+        private string GetSearchPageUrl(StartPage startPage)
+        {
+            if (!ContentReference.IsNullOrEmpty(startPage.SearchPageLink))
+            {
+                var url = _urlResolver.GetUrl(startPage.SearchPageLink);
+                if (!string.IsNullOrEmpty(url))
+                {
+                    return url;
+                }
+
+                // UrlResolver may fail if the content type has no registered template;
+                // fall back to building the URL from the page's URL segment.
+                var page = _contentLoader.Get<PageData>(startPage.SearchPageLink);
+                if (page != null && page.URLSegment != null)
+                {
+                    return "/" + page.URLSegment + "/";
+                }
+            }
+
+            return string.Empty;
         }
 
         private string GetLoginUrl(ContentReference returnToContentLink)

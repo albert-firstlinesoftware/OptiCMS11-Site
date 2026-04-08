@@ -5,6 +5,16 @@ App_Data/
 
 License.config
 
+# Environment-specific config files (use *.sample as templates)
+src/Alloy.Mvc.Template/web.config
+src/Alloy.Mvc.Template/ConnectionStrings.config
+
+# Local IIS Express config
+applicationHost.config
+
+# NuGet binary
+nuget.exe
+
 ## Ignore Visual Studio temporary files and build results.
 
 # User-specific files

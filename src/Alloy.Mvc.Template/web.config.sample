@@ -390,7 +390,7 @@
   <episerver.search active="true">
     <namedIndexingServices defaultService="serviceName">
       <services>
-        <add name="serviceName" baseUri="http://alloymvc.se/IndexingService/IndexingService.svc" accessKey="local" />
+        <add name="serviceName" baseUri="http://localhost:55555/IndexingService/IndexingService.svc" accessKey="local" />
       </services>
     </namedIndexingServices>
     <searchResultFilter defaultInclude="true">

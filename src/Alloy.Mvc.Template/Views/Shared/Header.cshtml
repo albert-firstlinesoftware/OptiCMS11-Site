@@ -32,13 +32,10 @@
                                     @*We use GET to submit the form to enable bookmarking etc of search results.  However, as GET will remove other
                                     query string values not in the form we can't use that in edit mode.*@
 
-                                    @{
-                                        using (Html.BeginForm(null, null, PageEditing.PageIsInEditMode ? FormMethod.Post : FormMethod.Get, new { @action = Model.Layout.SearchActionUrl }))
-                                        {
-                                            <input type="text" class="search-query" name="q" id="SearchKeywords" placeholder="@Html.Translate("/mainnavigation/search")"/>
-                                            <input type="submit" class="searchButton" id="SearchButton" value=""/>
-                                        }
-                                    }
+                                    <form action="@Model.Layout.SearchActionUrl" method="@(PageEditing.PageIsInEditMode ? "post" : "get")">
+                                        <input type="text" class="search-query" name="q" id="SearchKeywords" placeholder="@Html.Translate("/mainnavigation/search")"/>
+                                        <input type="submit" class="searchButton" id="SearchButton" value=""/>
+                                    </form>
                                 </div>
                             </div>
                         </div>

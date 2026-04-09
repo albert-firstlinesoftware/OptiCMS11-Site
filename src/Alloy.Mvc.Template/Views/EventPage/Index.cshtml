@@ -1,0 +1,70 @@
+@using AlloyTemplates
+@model PageViewModel<EventPage>
+
+@{ Layout = "~/Views/Shared/Layouts/_TwoPlusOne.cshtml"; }
+
+<h1 @Html.EditAttributes(x => x.CurrentPage.PageName)>@Model.CurrentPage.PageName</h1>
+<p class="introduction" @Html.EditAttributes(x => x.CurrentPage.MetaDescription)>@Model.CurrentPage.MetaDescription</p>
+
+<div class="row">
+    <div class="span8">
+        <div class="event-details">
+            <dl class="dl-horizontal">
+                <dt>Date</dt>
+                <dd @Html.EditAttributes(x => x.CurrentPage.EventStartDate)>
+                    @Model.CurrentPage.EventStartDate.ToString("dddd, MMMM d, yyyy - h:mm tt")
+                    @if (Model.CurrentPage.EventEndDate != DateTime.MinValue)
+                    {
+                        <text>&ndash; @Model.CurrentPage.EventEndDate.ToString("h:mm tt")</text>
+                    }
+                </dd>
+
+                @if (!string.IsNullOrWhiteSpace(Model.CurrentPage.Location))
+                {
+                    <dt>Location</dt>
+                    <dd @Html.EditAttributes(x => x.CurrentPage.Location)>
+                        @if (Model.CurrentPage.IsVirtualEvent)
+                        {
+                            <span class="label label-info">Online</span>
+                        }
+                        @Model.CurrentPage.Location
+                    </dd>
+                }
+                else if (Model.CurrentPage.IsVirtualEvent)
+                {
+                    <dt>Location</dt>
+                    <dd><span class="label label-info">Online event</span></dd>
+                }
+
+                @if (Model.CurrentPage.RegistrationLink != null && !Model.CurrentPage.RegistrationLink.IsEmpty())
+                {
+                    <dt>Register</dt>
+                    <dd>
+                        <a href="@Model.CurrentPage.RegistrationLink" class="btn btn-primary">Register now</a>
+                    </dd>
+                }
+            </dl>
+        </div>
+        <hr />
+    </div>
+</div>
+
+<div class="row">
+    <div class="span8 clearfix" @Html.EditAttributes(x => x.CurrentPage.MainBody)>
+        @Html.DisplayFor(m => m.CurrentPage.MainBody)
+    </div>
+</div>
+
+@Html.PropertyFor(x => x.CurrentPage.MainContentArea, new { CssClass = "row", Tag = Global.ContentAreaTags.TwoThirdsWidth })
+
+@section RelatedContent
+{
+    @if (Model.CurrentPage.PageImage != null)
+    {
+        <div @Html.EditAttributes(x => x.CurrentPage.PageImage)>
+            <img src="@Url.ContentUrl(Model.CurrentPage.PageImage)" />
+        </div>
+    }
+
+    @Html.PropertyFor(x => x.CurrentPage.RelatedContentArea, new { CssClass = "row", Tag = Global.ContentAreaTags.OneThirdWidth })
+}

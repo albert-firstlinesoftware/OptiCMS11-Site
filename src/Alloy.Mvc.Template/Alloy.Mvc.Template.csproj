@@ -306,6 +306,7 @@
     <Compile Include="Business\Initialization\FilterConfig.cs" />
     <Compile Include="Business\Initialization\ExtendedTinyMceInitialization.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
+    <Compile Include="Models\Pages\EventPage.cs" />
     <Compile Include="Models\Pages\ISearchPage.cs" />
     <Compile Include="Models\Pages\SearchPage.cs" />
     <Compile Include="Business\PageViewContextFactory.cs" />
@@ -489,6 +490,7 @@
     <Content Include="Views\Shared\DisplayTemplates\Image.cshtml" />
     <Content Include="Views\Shared\Blocks\JumbotronBlockWide.cshtml" />
     <Content Include="Views\Shared\Blocks\TeaserBlock.cshtml" />
+    <Content Include="Views\EventPage\Index.cshtml" />
     <Content Include="Views\ProductPage\Index.cshtml" />
     <Content Include="Views\Shared\Layouts\_TwoPlusOne.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\StringsCollection.cshtml" />
